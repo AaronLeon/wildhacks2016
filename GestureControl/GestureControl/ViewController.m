@@ -8,8 +8,11 @@
 
 #import "ViewController.h"
 
-
 @implementation ViewController 
+
+typedef void (^ClarifaiPredictionsCompletion)(NSArray <ClarifaiOutput *> *outputs, NSError *error);
+static NSString * const modelID = @"general";
+static NSString * const versionID = @"";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,4 +77,5 @@ NSData* imageToBuffer( CMSampleBufferRef source) {
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     return data;
 }
+
 @end

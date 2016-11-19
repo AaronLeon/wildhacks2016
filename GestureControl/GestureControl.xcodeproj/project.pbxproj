@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		684BF7DA1DE03C380020CCF3 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684BF7D91DE03C380020CCF3 /* QTKit.framework */; };
+		684BF8271DE0CAA60020CCF3 /* ClarifaiApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8111DE0CAA60020CCF3 /* ClarifaiApp.m */; };
+		684BF8281DE0CAA60020CCF3 /* ClarifaiConcept.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8131DE0CAA60020CCF3 /* ClarifaiConcept.m */; };
+		684BF8291DE0CAA60020CCF3 /* ClarifaiCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8161DE0CAA60020CCF3 /* ClarifaiCrop.m */; };
+		684BF82A1DE0CAA60020CCF3 /* ClarifaiImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8181DE0CAA60020CCF3 /* ClarifaiImage.m */; };
+		684BF82B1DE0CAA60020CCF3 /* ClarifaiInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF81A1DE0CAA60020CCF3 /* ClarifaiInput.m */; };
+		684BF82C1DE0CAA60020CCF3 /* ClarifaiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF81C1DE0CAA60020CCF3 /* ClarifaiModel.m */; };
+		684BF82D1DE0CAA60020CCF3 /* ClarifaiModelVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF81E1DE0CAA60020CCF3 /* ClarifaiModelVersion.m */; };
+		684BF82E1DE0CAA60020CCF3 /* ClarifaiOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8201DE0CAA60020CCF3 /* ClarifaiOutput.m */; };
+		684BF82F1DE0CAA60020CCF3 /* ClarifaiSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8221DE0CAA60020CCF3 /* ClarifaiSearchResult.m */; };
+		684BF8301DE0CAA60020CCF3 /* ClarifaiSearchTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8241DE0CAA60020CCF3 /* ClarifaiSearchTerm.m */; };
+		684BF8311DE0CAA60020CCF3 /* NSArray+Clarifai.m in Sources */ = {isa = PBXBuildFile; fileRef = 684BF8261DE0CAA60020CCF3 /* NSArray+Clarifai.m */; };
+		8D28AFE499EE98B7BF30246D /* libPods-GestureControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D90D8C74BC0AFF99CE3F55DE /* libPods-GestureControl.a */; };
 		94DF89911DE018F400E8380D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF89901DE018F400E8380D /* AppDelegate.m */; };
 		94DF89941DE018F400E8380D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF89931DE018F400E8380D /* main.m */; };
 		94DF89971DE018F400E8380D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF89961DE018F400E8380D /* ViewController.m */; };
@@ -17,6 +29,30 @@
 
 /* Begin PBXFileReference section */
 		684BF7D91DE03C380020CCF3 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		684BF8101DE0CAA60020CCF3 /* ClarifaiApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiApp.h; sourceTree = "<group>"; };
+		684BF8111DE0CAA60020CCF3 /* ClarifaiApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiApp.m; sourceTree = "<group>"; };
+		684BF8121DE0CAA60020CCF3 /* ClarifaiConcept.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiConcept.h; sourceTree = "<group>"; };
+		684BF8131DE0CAA60020CCF3 /* ClarifaiConcept.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiConcept.m; sourceTree = "<group>"; };
+		684BF8141DE0CAA60020CCF3 /* ClarifaiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiConstants.h; sourceTree = "<group>"; };
+		684BF8151DE0CAA60020CCF3 /* ClarifaiCrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiCrop.h; sourceTree = "<group>"; };
+		684BF8161DE0CAA60020CCF3 /* ClarifaiCrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiCrop.m; sourceTree = "<group>"; };
+		684BF8171DE0CAA60020CCF3 /* ClarifaiImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiImage.h; sourceTree = "<group>"; };
+		684BF8181DE0CAA60020CCF3 /* ClarifaiImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiImage.m; sourceTree = "<group>"; };
+		684BF8191DE0CAA60020CCF3 /* ClarifaiInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiInput.h; sourceTree = "<group>"; };
+		684BF81A1DE0CAA60020CCF3 /* ClarifaiInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiInput.m; sourceTree = "<group>"; };
+		684BF81B1DE0CAA60020CCF3 /* ClarifaiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiModel.h; sourceTree = "<group>"; };
+		684BF81C1DE0CAA60020CCF3 /* ClarifaiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiModel.m; sourceTree = "<group>"; };
+		684BF81D1DE0CAA60020CCF3 /* ClarifaiModelVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiModelVersion.h; sourceTree = "<group>"; };
+		684BF81E1DE0CAA60020CCF3 /* ClarifaiModelVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiModelVersion.m; sourceTree = "<group>"; };
+		684BF81F1DE0CAA60020CCF3 /* ClarifaiOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiOutput.h; sourceTree = "<group>"; };
+		684BF8201DE0CAA60020CCF3 /* ClarifaiOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiOutput.m; sourceTree = "<group>"; };
+		684BF8211DE0CAA60020CCF3 /* ClarifaiSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiSearchResult.h; sourceTree = "<group>"; };
+		684BF8221DE0CAA60020CCF3 /* ClarifaiSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiSearchResult.m; sourceTree = "<group>"; };
+		684BF8231DE0CAA60020CCF3 /* ClarifaiSearchTerm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiSearchTerm.h; sourceTree = "<group>"; };
+		684BF8241DE0CAA60020CCF3 /* ClarifaiSearchTerm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiSearchTerm.m; sourceTree = "<group>"; };
+		684BF8251DE0CAA60020CCF3 /* NSArray+Clarifai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Clarifai.h"; sourceTree = "<group>"; };
+		684BF8261DE0CAA60020CCF3 /* NSArray+Clarifai.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Clarifai.m"; sourceTree = "<group>"; };
+		6B6E4C27EDCAD52B2EE565A2 /* Pods-GestureControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GestureControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-GestureControl/Pods-GestureControl.release.xcconfig"; sourceTree = "<group>"; };
 		94DF898C1DE018F400E8380D /* GestureControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestureControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DF898F1DE018F400E8380D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94DF89901DE018F400E8380D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +62,8 @@
 		94DF89981DE018F400E8380D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94DF899B1DE018F400E8380D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94DF899D1DE018F400E8380D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F06D2CBB9182B478280712F /* Pods-GestureControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GestureControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GestureControl/Pods-GestureControl.debug.xcconfig"; sourceTree = "<group>"; };
+		D90D8C74BC0AFF99CE3F55DE /* libPods-GestureControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GestureControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				684BF7DA1DE03C380020CCF3 /* QTKit.framework in Frameworks */,
+				8D28AFE499EE98B7BF30246D /* libPods-GestureControl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,8 +83,39 @@
 			isa = PBXGroup;
 			children = (
 				684BF7D91DE03C380020CCF3 /* QTKit.framework */,
+				D90D8C74BC0AFF99CE3F55DE /* libPods-GestureControl.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		684BF80F1DE0CA990020CCF3 /* Clarifai */ = {
+			isa = PBXGroup;
+			children = (
+				684BF8101DE0CAA60020CCF3 /* ClarifaiApp.h */,
+				684BF8111DE0CAA60020CCF3 /* ClarifaiApp.m */,
+				684BF8121DE0CAA60020CCF3 /* ClarifaiConcept.h */,
+				684BF8131DE0CAA60020CCF3 /* ClarifaiConcept.m */,
+				684BF8141DE0CAA60020CCF3 /* ClarifaiConstants.h */,
+				684BF8151DE0CAA60020CCF3 /* ClarifaiCrop.h */,
+				684BF8161DE0CAA60020CCF3 /* ClarifaiCrop.m */,
+				684BF8171DE0CAA60020CCF3 /* ClarifaiImage.h */,
+				684BF8181DE0CAA60020CCF3 /* ClarifaiImage.m */,
+				684BF8191DE0CAA60020CCF3 /* ClarifaiInput.h */,
+				684BF81A1DE0CAA60020CCF3 /* ClarifaiInput.m */,
+				684BF81B1DE0CAA60020CCF3 /* ClarifaiModel.h */,
+				684BF81C1DE0CAA60020CCF3 /* ClarifaiModel.m */,
+				684BF81D1DE0CAA60020CCF3 /* ClarifaiModelVersion.h */,
+				684BF81E1DE0CAA60020CCF3 /* ClarifaiModelVersion.m */,
+				684BF81F1DE0CAA60020CCF3 /* ClarifaiOutput.h */,
+				684BF8201DE0CAA60020CCF3 /* ClarifaiOutput.m */,
+				684BF8211DE0CAA60020CCF3 /* ClarifaiSearchResult.h */,
+				684BF8221DE0CAA60020CCF3 /* ClarifaiSearchResult.m */,
+				684BF8231DE0CAA60020CCF3 /* ClarifaiSearchTerm.h */,
+				684BF8241DE0CAA60020CCF3 /* ClarifaiSearchTerm.m */,
+				684BF8251DE0CAA60020CCF3 /* NSArray+Clarifai.h */,
+				684BF8261DE0CAA60020CCF3 /* NSArray+Clarifai.m */,
+			);
+			name = Clarifai;
 			sourceTree = "<group>";
 		};
 		94DF89831DE018F400E8380D = {
@@ -54,6 +124,7 @@
 				94DF898E1DE018F400E8380D /* GestureControl */,
 				94DF898D1DE018F400E8380D /* Products */,
 				684BF7D81DE03C380020CCF3 /* Frameworks */,
+				97B8843757B99F090137798C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +139,7 @@
 		94DF898E1DE018F400E8380D /* GestureControl */ = {
 			isa = PBXGroup;
 			children = (
+				684BF80F1DE0CA990020CCF3 /* Clarifai */,
 				94DF898F1DE018F400E8380D /* AppDelegate.h */,
 				94DF89901DE018F400E8380D /* AppDelegate.m */,
 				94DF89951DE018F400E8380D /* ViewController.h */,
@@ -88,6 +160,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		97B8843757B99F090137798C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F06D2CBB9182B478280712F /* Pods-GestureControl.debug.xcconfig */,
+				6B6E4C27EDCAD52B2EE565A2 /* Pods-GestureControl.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -95,9 +176,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94DF89A01DE018F400E8380D /* Build configuration list for PBXNativeTarget "GestureControl" */;
 			buildPhases = (
+				AAB949633EA9CF7173668A7B /* [CP] Check Pods Manifest.lock */,
 				94DF89881DE018F400E8380D /* Sources */,
 				94DF89891DE018F400E8380D /* Frameworks */,
 				94DF898A1DE018F400E8380D /* Resources */,
+				FEB1677FAEF195C7A6686465 /* [CP] Embed Pods Frameworks */,
+				7199C3940763B38F5AE16868 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -153,12 +237,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7199C3940763B38F5AE16868 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GestureControl/Pods-GestureControl-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAB949633EA9CF7173668A7B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FEB1677FAEF195C7A6686465 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GestureControl/Pods-GestureControl-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		94DF89881DE018F400E8380D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				684BF82A1DE0CAA60020CCF3 /* ClarifaiImage.m in Sources */,
+				684BF8311DE0CAA60020CCF3 /* NSArray+Clarifai.m in Sources */,
+				684BF82F1DE0CAA60020CCF3 /* ClarifaiSearchResult.m in Sources */,
+				684BF82D1DE0CAA60020CCF3 /* ClarifaiModelVersion.m in Sources */,
+				684BF82E1DE0CAA60020CCF3 /* ClarifaiOutput.m in Sources */,
+				684BF82C1DE0CAA60020CCF3 /* ClarifaiModel.m in Sources */,
+				684BF8291DE0CAA60020CCF3 /* ClarifaiCrop.m in Sources */,
+				684BF8271DE0CAA60020CCF3 /* ClarifaiApp.m in Sources */,
+				684BF8301DE0CAA60020CCF3 /* ClarifaiSearchTerm.m in Sources */,
+				684BF8281DE0CAA60020CCF3 /* ClarifaiConcept.m in Sources */,
 				94DF89971DE018F400E8380D /* ViewController.m in Sources */,
+				684BF82B1DE0CAA60020CCF3 /* ClarifaiInput.m in Sources */,
 				94DF89941DE018F400E8380D /* main.m in Sources */,
 				94DF89911DE018F400E8380D /* AppDelegate.m in Sources */,
 			);
@@ -269,6 +412,7 @@
 		};
 		94DF89A11DE018F400E8380D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F06D2CBB9182B478280712F /* Pods-GestureControl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -281,6 +425,7 @@
 		};
 		94DF89A21DE018F400E8380D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B6E4C27EDCAD52B2EE565A2 /* Pods-GestureControl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
