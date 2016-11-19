@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ClarifaiApp.h"
 
 @implementation ViewController 
 
