@@ -10,48 +10,31 @@
 #import "ClarifaiApp.h"
 #import <Carbon/Carbon.h>
 
-@implementation ViewController 
-
-typedef void (^ClarifaiPredictionsCompletion)(NSArray <ClarifaiOutput *> *outputs, NSError *error);
-static NSString * const modelID = @"general";
-static NSString * const versionID = @"";
+@implementation ViewController
 
 ClarifaiApp *app;
-- (IBAction)image:(id)sender {
-    
-}
+AVCaptureSession *session;
+int counter;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setMessageToMessages:@"smile"];
 
-    // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionRuntimeErrorNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStartRunningNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStopRunningNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionRuntimeErrorNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStartRunningNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStopRunningNotification object:nil];
     [self accessCamera];
     
     app = [[ClarifaiApp alloc] initWithAppID:@"O-lRr8yaf-2co6U5NvsCekAvL1QlsdXveH5Db8E9" appSecret:@"E0U4dPa1klxionbwfD3reRviXWmSvqjr7M1frCSe"];
-
 }
-
-
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
-}
-
-AVCaptureSession *session;
 
 - (void)accessCamera {
+    NSError *error;
     session = [[AVCaptureSession alloc] init];
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    NSError *error;
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-    if (error) {
+    if (error)
         NSLog(@"%@", error);
-    }
     [session addInput:deviceInput];
     [session startRunning];
 
@@ -63,44 +46,23 @@ AVCaptureSession *session;
     [session addOutput:output];
 }
 
+//- (void)captureStateChanged:(NSNotification *)notification {
+//    NSLog(@"%@", notification);
+//}
 
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
 
-- (void)captureStateChanged:(NSNotification *)notification {
-    NSLog(@"%@", notification);
-}
-int i;
-NSImage * image;
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
-{
-    NSData *data = imageToBuffer(sampleBuffer);
-    NSLog(@"%@", data);
-
-    if (!image) {
-        if (i > 7) {
-            image = [self imageFromBuffer:sampleBuffer];
-            [self recognizeImage:image];
-            _imageView.image = image;
-        }
-        i++;
+    if (counter == 30) {
+        NSImage* image = [self imageFromBuffer:sampleBuffer];
+        [self recognizeImage:image];
+        _imageView.image = image;
+        counter = 0;
     }
+    
+    counter++;
 }
 
-NSData* imageToBuffer( CMSampleBufferRef source) {
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(source);
-    CVPixelBufferLockBaseAddress(imageBuffer,0);
-
-    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-    size_t width = CVPixelBufferGetWidth(imageBuffer);
-    size_t height = CVPixelBufferGetHeight(imageBuffer);
-    void *src_buff = CVPixelBufferGetBaseAddress(imageBuffer);
-
-    NSData *data = [NSData dataWithBytes:src_buff length:bytesPerRow * height];
-
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    return data;
-}
-
-- (NSImage *) imageFromBuffer:(CMSampleBufferRef)buffer {
+- (NSImage *)imageFromBuffer:(CMSampleBufferRef)buffer {
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(buffer);
     CVPixelBufferLockBaseAddress(imageBuffer, 0);
 
