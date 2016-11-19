@@ -7,9 +7,13 @@
 //
 
 #import "ViewController.h"
-
+#import "ClarifaiApp.h"
 
 @implementation ViewController 
+
+typedef void (^ClarifaiPredictionsCompletion)(NSArray <ClarifaiOutput *> *outputs, NSError *error);
+static NSString * const modelID = @"general";
+static NSString * const versionID = @"";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,6 +47,8 @@ AVCaptureSession *session;
     [session startRunning];
 
     AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];
+    [output setVideoSettings:[NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInt:kCVPixelFormatType_32BGRA] forKey:(NSString*)kCVPixelBufferPixelFormatTypeKey]];
+
     dispatch_queue_t queue = dispatch_queue_create("camera", 0);
     [output setSampleBufferDelegate:self queue:queue];
     [session addOutput:output];
@@ -58,6 +64,11 @@ AVCaptureSession *session;
 {
     NSData *data = imageToBuffer(sampleBuffer);
     NSLog(@"%@", data);
+
+    NSImage *image = [self imageFromBuffer:sampleBuffer];
+    if (image) {
+        NSLog(@"Created image 2");
+    }
 }
 
 NSData* imageToBuffer( CMSampleBufferRef source) {
@@ -74,4 +85,25 @@ NSData* imageToBuffer( CMSampleBufferRef source) {
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     return data;
 }
+
+- (NSImage *) imageFromBuffer:(CMSampleBufferRef)buffer {
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(buffer);
+    CVPixelBufferLockBaseAddress(imageBuffer, 0);
+
+    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+
+    size_t width = CVPixelBufferGetWidth(imageBuffer);
+    size_t height = CVPixelBufferGetHeight(imageBuffer);
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(baseAddress, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+
+    CGImageRef image = CGBitmapContextCreateImage(context);
+
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+
+    return [[NSImage alloc] initWithCGImage:image size:CGSizeMake(720, 1280)];
+}
+
 @end
