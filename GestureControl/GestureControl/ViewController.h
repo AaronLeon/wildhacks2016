@@ -11,6 +11,8 @@
 
 @interface ViewController : NSViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
+@property (weak) IBOutlet NSImageView *imageView;
+
 
 @end
 

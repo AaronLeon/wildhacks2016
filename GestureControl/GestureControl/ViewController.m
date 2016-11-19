@@ -16,6 +16,9 @@ static NSString * const modelID = @"general";
 static NSString * const versionID = @"";
 
 ClarifaiApp *app;
+- (IBAction)image:(id)sender {
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,15 +67,20 @@ AVCaptureSession *session;
 - (void)captureStateChanged:(NSNotification *)notification {
     NSLog(@"%@", notification);
 }
-
+int i;
+NSImage * image;
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
 {
     NSData *data = imageToBuffer(sampleBuffer);
     NSLog(@"%@", data);
 
-    NSImage *image = [self imageFromBuffer:sampleBuffer];
-    if (image) {
-        NSLog(@"Created image 2");
+    if (!image) {
+        if (i > 7) {
+            image = [self imageFromBuffer:sampleBuffer];
+            [self recognizeImage:image];
+            _imageView.image = image;
+        }
+        i++;
     }
 }
 
@@ -102,13 +110,35 @@ NSData* imageToBuffer( CMSampleBufferRef source) {
     size_t height = CVPixelBufferGetHeight(imageBuffer);
 
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(baseAddress, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGContextRef context = CGBitmapContextCreate(baseAddress, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little |kCGImageAlphaNoneSkipFirst);
 
     CGImageRef image = CGBitmapContextCreateImage(context);
 
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
 
     return [[NSImage alloc] initWithCGImage:image size:CGSizeMake(720, 1280)];
+}
+
+- (void)recognizeImage:(NSImage *)image {
+    // Fetch Clarifai's general model.
+    [app getModelByName:@"general-v1.3" completion:^(ClarifaiModel *model, NSError *error) {
+        // Create a Clarifai image from a uiimage.
+        ClarifaiImage *clarifaiImage = [[ClarifaiImage alloc] initWithImage:image];
+        
+        // Use Clarifai's general model to pedict tags for the given image.
+        [model predictOnImages:@[clarifaiImage] completion:^(NSArray<ClarifaiOutput *> *outputs, NSError *error) {
+            if (!error) {
+                ClarifaiOutput *output = outputs[0];
+                
+                // Loop through predicted concepts (tags), and display them on the screen.
+                NSMutableArray *tags = [NSMutableArray array];
+                for (ClarifaiConcept *concept in output.concepts) {
+                    [tags addObject:concept.conceptName];
+                }
+                NSLog(@"tags: %@", tags);
+            }
+        }];
+    }];
 }
 
 @end
