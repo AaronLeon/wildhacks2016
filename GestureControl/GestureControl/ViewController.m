@@ -15,6 +15,8 @@ typedef void (^ClarifaiPredictionsCompletion)(NSArray <ClarifaiOutput *> *output
 static NSString * const modelID = @"general";
 static NSString * const versionID = @"";
 
+ClarifaiApp *app;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -23,6 +25,9 @@ static NSString * const versionID = @"";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStartRunningNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStopRunningNotification object:nil];
     [self accessCamera];
+    
+    app = [[ClarifaiApp alloc] initWithAppID:@"O-lRr8yaf-2co6U5NvsCekAvL1QlsdXveH5Db8E9" appSecret:@"E0U4dPa1klxionbwfD3reRviXWmSvqjr7M1frCSe"];
+
 }
 
 
