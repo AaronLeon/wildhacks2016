@@ -94,11 +94,7 @@ int counter;
                 ClarifaiOutput *output = outputs[0];
                 
                 // Loop through predicted concepts (tags), and display them on the screen.
-                NSMutableArray *tags = [NSMutableArray array];
-                for (ClarifaiConcept *concept in output.concepts) {
-                    [tags addObject:concept.conceptName];
-                }
-                NSLog(@"tags: %@", tags);
+                [self setMessageToMessages:(output.concepts[0].conceptName)];
             }
         }];
     }];
