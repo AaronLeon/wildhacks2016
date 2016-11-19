@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		684BF7DA1DE03C380020CCF3 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684BF7D91DE03C380020CCF3 /* QTKit.framework */; };
 		94DF89911DE018F400E8380D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF89901DE018F400E8380D /* AppDelegate.m */; };
 		94DF89941DE018F400E8380D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF89931DE018F400E8380D /* main.m */; };
 		94DF89971DE018F400E8380D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF89961DE018F400E8380D /* ViewController.m */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		684BF7D91DE03C380020CCF3 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		94DF898C1DE018F400E8380D /* GestureControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestureControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DF898F1DE018F400E8380D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94DF89901DE018F400E8380D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -31,17 +33,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				684BF7DA1DE03C380020CCF3 /* QTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		684BF7D81DE03C380020CCF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				684BF7D91DE03C380020CCF3 /* QTKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		94DF89831DE018F400E8380D = {
 			isa = PBXGroup;
 			children = (
 				94DF898E1DE018F400E8380D /* GestureControl */,
 				94DF898D1DE018F400E8380D /* Products */,
+				684BF7D81DE03C380020CCF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,7 +114,7 @@
 		94DF89841DE018F400E8380D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Meg Grasse";
 				TargetAttributes = {
 					94DF898B1DE018F400E8380D = {
@@ -184,6 +196,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -231,6 +244,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -296,6 +310,7 @@
 				94DF89A21DE018F400E8380D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
