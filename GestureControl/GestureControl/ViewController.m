@@ -100,15 +100,15 @@ int counter;
                 ClarifaiOutput *output = outputs[0];
                 
                 // Loop through predicted concepts (tags), and display them on the screen.
-                NSLog(@"%@", output.concepts[0].conceptName);
-                NSLog(@"%f", output.concepts[0].score);
-                NSLog(@"%@", output.concepts[1].conceptName);
-                NSLog(@"%f", output.concepts[1].score);
+                NSLog(@"%@: %f", output.concepts[0].conceptName, output.concepts[0].score);
+                NSLog(@"%@: %f", output.concepts[1].conceptName, output.concepts[1].score);
+                NSLog(@"%@: %f", output.concepts[2].conceptName, output.concepts[2].score);
                 NSLog(@"break");
-                if ([output.concepts[0].conceptName isEqualToString:@"tongue"] && output.concepts[0].score > 0.3) {
-                    [self sendEmojiToMessages:(output.concepts[0].conceptName)];
-                } else if ([output.concepts[0].conceptName isEqualToString:@"smile"] && output.concepts[0].score > 0.3) {
-                    [self sendEmojiToMessages:(output.concepts[0].conceptName)];
+                if ([output.concepts[0].conceptName isEqualToString:@"tongue"] && output.concepts[0].score > 0.35) {
+                    [self sendEmojiToMessages:@"tongue"];
+                }
+                if ([output.concepts[0].conceptName isEqualToString:@"poop"] && output.concepts[0].score > 0.3) {
+                    [self sendEmojiToMessages:@"poop"];
                 }
             }
         }];
