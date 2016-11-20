@@ -22,7 +22,7 @@ int counter;
     [NSThread sleepForTimeInterval:5];
     [self setMessageToMessages:@"dictation"];
     [NSThread sleepForTimeInterval:5];
-//    [self setMessageToMessages:@"dictation"];
+    [self setMessageToMessages:@"dictation"];
     [self setMessageToMessages:@"smile"];
     [self setMessageToMessages:@"send"];
 
@@ -246,16 +246,14 @@ int counter;
             CFRelease(returnKeyDown);
             CFRelease(returnKeyUp);
         } else if ([emoji isEqualToString:@"dictation"]) {
-//            [NSThread sleepForTimeInterval:5];
             CGEventRef fnKeyDown = CGEventCreateKeyboardEvent(src, kVK_Function, YES);
             CGEventRef fnKeyUp = CGEventCreateKeyboardEvent(src, kVK_Function, NO);
-            CGEventRef mKeyDown = CGEventCreateKeyboardEvent(src,  kVK_ANSI_9, YES);
-            CGEventRef mKeyUp = CGEventCreateKeyboardEvent(src,  kVK_ANSI_9, NO);
-            CGEventSetFlags(mKeyDown, kCGEventFlagMaskCommand);
-            CGEventPostToPSN(&psn, mKeyDown);
-            CGEventPostToPSN(&psn, mKeyUp);
-            CFRelease(mKeyDown);
-            CFRelease(mKeyUp);
+            CGEventPostToPSN(&psn, fnKeyDown);
+            CGEventPostToPSN(&psn, fnKeyUp);
+            CGEventPostToPSN(&psn, fnKeyDown);
+            CGEventPostToPSN(&psn, fnKeyUp);
+            CFRelease(fnKeyDown);
+            CFRelease(fnKeyUp);
         } else if ([emoji isEqualToString:@"enddictation"]) {
             CGEventRef fnKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_G, YES);
             CGEventRef fnKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_G, NO);
