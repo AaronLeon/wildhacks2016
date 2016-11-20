@@ -20,18 +20,18 @@ int counter;
     [super viewDidLoad];
     [[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iChat"][0] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     [NSThread sleepForTimeInterval:5];
-    [self setMessageToMessages:@"dictation"];
+    [self toggleDictation];
     [NSThread sleepForTimeInterval:5];
-    [self setMessageToMessages:@"dictation"];
-    [self setMessageToMessages:@"smile"];
-    [self setMessageToMessages:@"send"];
+    [self toggleDictation];
+    [NSThread sleepForTimeInterval:5];
+    [self accessCamera];
 
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionRuntimeErrorNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStartRunningNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStopRunningNotification object:nil];
 //    [self accessCamera];
     
-    app = [[ClarifaiApp alloc] initWithAppID:@"O-lRr8yaf-2co6U5NvsCekAvL1QlsdXveH5Db8E9" appSecret:@"E0U4dPa1klxionbwfD3reRviXWmSvqjr7M1frCSe"];
+    app = [[ClarifaiApp alloc] initWithAppID:@"WcVvxQ4gorHm1YqNk_uI0X9r1ucUIFF030cks9gs" appSecret:@"J4PEW575bh-35RI_RL2Cclwk9pPsjyC_0ARX6K9F"];
 }
 
 - (void)accessCamera {
@@ -90,7 +90,7 @@ int counter;
 
 - (void)recognizeImage:(NSImage *)image {
     // Fetch Clarifai's general model.
-    [app getModelByName:@"general-v1.3" completion:^(ClarifaiModel *model, NSError *error) {
+    [app getModelByName:@"gestures" completion:^(ClarifaiModel *model, NSError *error) {
         // Create a Clarifai image from a uiimage.
         ClarifaiImage *clarifaiImage = [[ClarifaiImage alloc] initWithImage:image];
         
@@ -100,13 +100,16 @@ int counter;
                 ClarifaiOutput *output = outputs[0];
                 
                 // Loop through predicted concepts (tags), and display them on the screen.
-                [self setMessageToMessages:(output.concepts[0].conceptName)];
+                NSLog(@"%f", output.concepts[0].score);
+                if ([output.concepts[0].conceptName isEqualToString:@"tongue"] && output.concepts[0].score > 0.3) {
+                    [self sendEmojiToMessages:(output.concepts[0].conceptName)];
+                }
             }
         }];
     }];
 }
 
-- (void)setMessageToMessages:(NSString*)emoji {
+- (void)sendEmojiToMessages:(NSString*)emoji {
     pid_t pid = [(NSRunningApplication*)[[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iChat"] objectAtIndex:0] processIdentifier];
     ProcessSerialNumber psn;
     OSStatus err = GetProcessForPID(pid, &psn);
@@ -245,43 +248,44 @@ int counter;
             CGEventPostToPSN(&psn, returnKeyUp);
             CFRelease(returnKeyDown);
             CFRelease(returnKeyUp);
-        } else if ([emoji isEqualToString:@"dictation"]) {
-            CGEventRef fnKeyDown = CGEventCreateKeyboardEvent(src, kVK_Function, YES);
-            CGEventRef fnKeyUp = CGEventCreateKeyboardEvent(src, kVK_Function, NO);
-            CGEventPostToPSN(&psn, fnKeyDown);
-            CGEventPostToPSN(&psn, fnKeyUp);
-            CGEventPostToPSN(&psn, fnKeyDown);
-            CGEventPostToPSN(&psn, fnKeyUp);
-            CFRelease(fnKeyDown);
-            CFRelease(fnKeyUp);
-        } else if ([emoji isEqualToString:@"enddictation"]) {
-            CGEventRef fnKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_G, YES);
-            CGEventRef fnKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_G, NO);
-            CGEventPostToPSN(&psn, fnKeyDown);
-            CGEventPostToPSN(&psn, fnKeyUp);
-            CFRelease(fnKeyDown);
-            CFRelease(fnKeyUp);
-            CGEventRef semicolonKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_Semicolon, YES);
-            CGEventRef semicolonKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_Semicolon, NO);
-            CGEventRef parenKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_9, YES);
-            CGEventRef parenKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_9, NO);
-            CGEventRef spaceKeyDown = CGEventCreateKeyboardEvent(src, kVK_Space, YES);
-            CGEventRef spaceKeyUp = CGEventCreateKeyboardEvent(src, kVK_Space, NO);
-            CGEventSetFlags(semicolonKeyDown, kCGEventFlagMaskShift);
-            CGEventSetFlags(parenKeyDown, kCGEventFlagMaskShift);
-            CGEventPostToPSN(&psn, semicolonKeyDown);
-            CGEventPostToPSN(&psn, semicolonKeyUp);
-            CGEventPostToPSN(&psn, parenKeyDown);
-            CGEventPostToPSN(&psn, parenKeyUp);
-            CGEventPostToPSN(&psn, spaceKeyDown);
-            CGEventPostToPSN(&psn, spaceKeyUp);
-            CFRelease(semicolonKeyDown);
-            CFRelease(semicolonKeyUp);
-            CFRelease(parenKeyDown);
-            CFRelease(parenKeyUp);
-            CFRelease(spaceKeyDown);
-            CFRelease(spaceKeyUp);
         }
+        CFRelease(src);
+        [self sendMessage];
+    }
+}
+
+- (void)toggleDictation {
+    pid_t pid = [(NSRunningApplication*)[[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iChat"] objectAtIndex:0] processIdentifier];
+    ProcessSerialNumber psn;
+    OSStatus err = GetProcessForPID(pid, &psn);
+    if (err == noErr) {
+        CGEventSourceRef src =
+        CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
+        CGEventRef fnKeyDown = CGEventCreateKeyboardEvent(src, kVK_Function, YES);
+        CGEventRef fnKeyUp = CGEventCreateKeyboardEvent(src, kVK_Function, NO);
+        CGEventPostToPSN(&psn, fnKeyDown);
+        CGEventPostToPSN(&psn, fnKeyUp);
+        CGEventPostToPSN(&psn, fnKeyDown);
+        CGEventPostToPSN(&psn, fnKeyUp);
+        CFRelease(fnKeyDown);
+        CFRelease(fnKeyUp);
+        CFRelease(src);
+    }
+}
+
+- (void)sendMessage {
+    pid_t pid = [(NSRunningApplication*)[[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iChat"] objectAtIndex:0] processIdentifier];
+    ProcessSerialNumber psn;
+    OSStatus err = GetProcessForPID(pid, &psn);
+    if (err == noErr) {
+        CGEventSourceRef src =
+        CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
+        CGEventRef returnKeyDown = CGEventCreateKeyboardEvent(src, kVK_Return, YES);
+        CGEventRef returnKeyUp = CGEventCreateKeyboardEvent(src, kVK_Return, NO);
+        CGEventPostToPSN(&psn, returnKeyDown);
+        CGEventPostToPSN(&psn, returnKeyUp);
+        CFRelease(returnKeyDown);
+        CFRelease(returnKeyUp);
         CFRelease(src);
     }
 }
