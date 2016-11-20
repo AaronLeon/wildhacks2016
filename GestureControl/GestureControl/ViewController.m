@@ -19,10 +19,10 @@ int counter;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iChat"][0] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
-    [NSThread sleepForTimeInterval:5];
-    [self toggleDictation];
-    [NSThread sleepForTimeInterval:5];
-    [self toggleDictation];
+//    [NSThread sleepForTimeInterval:5];
+//    [self toggleDictation];
+//    [NSThread sleepForTimeInterval:5];
+//    [self toggleDictation];
     [NSThread sleepForTimeInterval:5];
     [self accessCamera];
 
@@ -31,7 +31,7 @@ int counter;
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStopRunningNotification object:nil];
 //    [self accessCamera];
     
-    app = [[ClarifaiApp alloc] initWithAppID:@"WcVvxQ4gorHm1YqNk_uI0X9r1ucUIFF030cks9gs" appSecret:@"J4PEW575bh-35RI_RL2Cclwk9pPsjyC_0ARX6K9F"];
+    app = [[ClarifaiApp alloc] initWithAppID:@"qdHhhfxf4lygaKAq3RQYXN1TsbDryc6q4uLhRtV7" appSecret:@"rEG51ukIcp0sq4G52xQWLaM8DoDYRSiFFM6rhW-m"];
 }
 
 - (void)accessCamera {
@@ -90,7 +90,7 @@ int counter;
 
 - (void)recognizeImage:(NSImage *)image {
     // Fetch Clarifai's general model.
-    [app getModelByName:@"gestures" completion:^(ClarifaiModel *model, NSError *error) {
+    [app getModelByName:@"multiple_gestures2" completion:^(ClarifaiModel *model, NSError *error) {
         // Create a Clarifai image from a uiimage.
         ClarifaiImage *clarifaiImage = [[ClarifaiImage alloc] initWithImage:image];
         
@@ -100,8 +100,14 @@ int counter;
                 ClarifaiOutput *output = outputs[0];
                 
                 // Loop through predicted concepts (tags), and display them on the screen.
+                NSLog(@"%@", output.concepts[0].conceptName);
                 NSLog(@"%f", output.concepts[0].score);
+                NSLog(@"%@", output.concepts[1].conceptName);
+                NSLog(@"%f", output.concepts[1].score);
+                NSLog(@"break");
                 if ([output.concepts[0].conceptName isEqualToString:@"tongue"] && output.concepts[0].score > 0.3) {
+                    [self sendEmojiToMessages:(output.concepts[0].conceptName)];
+                } else if ([output.concepts[0].conceptName isEqualToString:@"smile"] && output.concepts[0].score > 0.3) {
                     [self sendEmojiToMessages:(output.concepts[0].conceptName)];
                 }
             }
@@ -241,13 +247,29 @@ int counter;
             CFRelease(dKeyUp);
             CFRelease(spaceKeyDown);
             CFRelease(spaceKeyUp);
-        } else if ([emoji isEqualToString:@"send"]) {
-            CGEventRef returnKeyDown = CGEventCreateKeyboardEvent(src, kVK_Return, YES);
-            CGEventRef returnKeyUp = CGEventCreateKeyboardEvent(src, kVK_Return, NO);
-            CGEventPostToPSN(&psn, returnKeyDown);
-            CGEventPostToPSN(&psn, returnKeyUp);
-            CFRelease(returnKeyDown);
-            CFRelease(returnKeyUp);
+        } else if ([emoji isEqualToString:@"poop"]) {
+            CGEventRef pKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_P, YES);
+            CGEventRef pKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_P, NO);
+            CGEventRef oKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_O, YES);
+            CGEventRef oKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_O, NO);
+            CGEventRef spaceKeyDown = CGEventCreateKeyboardEvent(src, kVK_Space, YES);
+            CGEventRef spaceKeyUp = CGEventCreateKeyboardEvent(src, kVK_Space, NO);
+            CGEventPostToPSN(&psn, pKeyDown);
+            CGEventPostToPSN(&psn, pKeyUp);
+            CGEventPostToPSN(&psn, oKeyDown);
+            CGEventPostToPSN(&psn, oKeyUp);
+            CGEventPostToPSN(&psn, oKeyDown);
+            CGEventPostToPSN(&psn, oKeyUp);
+            CGEventPostToPSN(&psn, pKeyDown);
+            CGEventPostToPSN(&psn, pKeyUp);
+            CGEventPostToPSN(&psn, spaceKeyDown);
+            CGEventPostToPSN(&psn, spaceKeyUp);
+            CFRelease(pKeyDown);
+            CFRelease(pKeyUp);
+            CFRelease(oKeyDown);
+            CFRelease(oKeyUp);
+            CFRelease(spaceKeyDown);
+            CFRelease(spaceKeyUp);
         }
         CFRelease(src);
         [self sendMessage];
