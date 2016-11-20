@@ -18,12 +18,18 @@ int counter;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iChat"][0] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
+    [NSThread sleepForTimeInterval:5];
+    [self setMessageToMessages:@"dictation"];
+    [NSThread sleepForTimeInterval:5];
+    [self setMessageToMessages:@"dictation"];
     [self setMessageToMessages:@"smile"];
+    [self setMessageToMessages:@"send"];
 
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionRuntimeErrorNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStartRunningNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureStateChanged:) name:AVCaptureSessionDidStopRunningNotification object:nil];
-    [self accessCamera];
+//    [self accessCamera];
     
     app = [[ClarifaiApp alloc] initWithAppID:@"O-lRr8yaf-2co6U5NvsCekAvL1QlsdXveH5Db8E9" appSecret:@"E0U4dPa1klxionbwfD3reRviXWmSvqjr7M1frCSe"];
 }
@@ -232,7 +238,50 @@ int counter;
             CFRelease(dKeyUp);
             CFRelease(spaceKeyDown);
             CFRelease(spaceKeyUp);
-    }
+        } else if ([emoji isEqualToString:@"send"]) {
+            CGEventRef returnKeyDown = CGEventCreateKeyboardEvent(src, kVK_Return, YES);
+            CGEventRef returnKeyUp = CGEventCreateKeyboardEvent(src, kVK_Return, NO);
+            CGEventPostToPSN(&psn, returnKeyDown);
+            CGEventPostToPSN(&psn, returnKeyUp);
+            CFRelease(returnKeyDown);
+            CFRelease(returnKeyUp);
+        } else if ([emoji isEqualToString:@"dictation"]) {
+            CGEventRef fnKeyDown = CGEventCreateKeyboardEvent(src, kVK_Function, YES);
+            CGEventRef fnKeyUp = CGEventCreateKeyboardEvent(src, kVK_Function, NO);
+            CGEventPostToPSN(&psn, fnKeyDown);
+            CGEventPostToPSN(&psn, fnKeyUp);
+            CGEventPostToPSN(&psn, fnKeyDown);
+            CGEventPostToPSN(&psn, fnKeyUp);
+            CFRelease(fnKeyDown);
+            CFRelease(fnKeyUp);
+        } else if ([emoji isEqualToString:@"enddictation"]) {
+            CGEventRef fnKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_G, YES);
+            CGEventRef fnKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_G, NO);
+            CGEventPostToPSN(&psn, fnKeyDown);
+            CGEventPostToPSN(&psn, fnKeyUp);
+            CFRelease(fnKeyDown);
+            CFRelease(fnKeyUp);
+            CGEventRef semicolonKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_Semicolon, YES);
+            CGEventRef semicolonKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_Semicolon, NO);
+            CGEventRef parenKeyDown = CGEventCreateKeyboardEvent(src, kVK_ANSI_9, YES);
+            CGEventRef parenKeyUp = CGEventCreateKeyboardEvent(src, kVK_ANSI_9, NO);
+            CGEventRef spaceKeyDown = CGEventCreateKeyboardEvent(src, kVK_Space, YES);
+            CGEventRef spaceKeyUp = CGEventCreateKeyboardEvent(src, kVK_Space, NO);
+            CGEventSetFlags(semicolonKeyDown, kCGEventFlagMaskShift);
+            CGEventSetFlags(parenKeyDown, kCGEventFlagMaskShift);
+            CGEventPostToPSN(&psn, semicolonKeyDown);
+            CGEventPostToPSN(&psn, semicolonKeyUp);
+            CGEventPostToPSN(&psn, parenKeyDown);
+            CGEventPostToPSN(&psn, parenKeyUp);
+            CGEventPostToPSN(&psn, spaceKeyDown);
+            CGEventPostToPSN(&psn, spaceKeyUp);
+            CFRelease(semicolonKeyDown);
+            CFRelease(semicolonKeyUp);
+            CFRelease(parenKeyDown);
+            CFRelease(parenKeyUp);
+            CFRelease(spaceKeyDown);
+            CFRelease(spaceKeyUp);
+        }
         CFRelease(src);
     }
 }
